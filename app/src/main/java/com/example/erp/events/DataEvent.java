@@ -15,7 +15,7 @@ public class DataEvent {
             this.mProductResponse = mProductResponse;
         }
 
-        public ProductResponse getmProductResponse() {
+        public ProductResponse getProductResponse() {
             return mProductResponse;
         }
     }

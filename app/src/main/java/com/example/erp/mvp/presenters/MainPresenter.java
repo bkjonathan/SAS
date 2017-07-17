@@ -1,18 +1,19 @@
 package com.example.erp.mvp.presenters;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.erp.ERP;
-import com.example.erp.data.models.BaseModel;
 import com.example.erp.data.models.ProductModel;
 import com.example.erp.data.models.UserModel;
+import com.example.erp.data.vos.ProductVO;
 import com.example.erp.events.DataEvent;
 import com.example.erp.events.LoadFailedEvent;
 import com.example.erp.mvp.presenters.base.BasePresenter;
 import com.example.erp.mvp.views.MainView;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -43,10 +44,12 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     @Subscribe
     public void onProductLoadedEvent(DataEvent.ProductEvent event) {
-        String products = event.getmProductResponse().getData().get(0).getBrandName();
+        List<ProductVO> productList = event.getProductResponse().getData();
+        mView.displayProductList(productList);
     }
 
     @Subscribe
     public void onProductLoadFailed(LoadFailedEvent event) {
+        mView.displayFailedToLoad(event.getErrorMsg());
     }
 }

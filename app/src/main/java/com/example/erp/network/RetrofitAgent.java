@@ -52,8 +52,6 @@ public class RetrofitAgent implements DataAgent {
         });
     }
 
-
-    //TODO: to call data from api
     @Override
     public void loadProducts(String token) {
         final Call<ProductResponse> dataCall = apiCalls.loadProducts(token);

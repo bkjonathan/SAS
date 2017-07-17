@@ -3,7 +3,7 @@ package com.example.erp.data.vos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DatumVO {
+public class ProductVO {
 
     @SerializedName("brand_name")
     private String mBrandName;
