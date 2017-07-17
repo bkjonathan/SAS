@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="register_card_width">450dp</dimen>
+    <dimen name="register_card_height">320dp</dimen>
+</resources>
