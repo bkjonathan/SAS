@@ -10,7 +10,6 @@ import java.util.List;
  */
 
 public interface MainView extends BaseView {
-    void navigateToLogin();
     void displayProductList(List<ProductVO> productList);
     void displayFailedToLoad(String message);
 }

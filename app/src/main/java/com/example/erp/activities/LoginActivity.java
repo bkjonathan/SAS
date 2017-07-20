@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity
 
     @Override
     public void onLoginSuccess() {
-        startActivity(MainActivity.newIntent(this));
+        startActivity(PasswordLoginActivity.newIntent(this));
         finish();
     }
 

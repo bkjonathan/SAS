@@ -83,12 +83,6 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void navigateToLogin() {
-        startActivity(LoginActivity.newIntent(this));
-        finish();
-    }
-
-    @Override
     public void displayProductList(List<ProductVO> productList) {
         mProductAdapter.setData(productList);
     }

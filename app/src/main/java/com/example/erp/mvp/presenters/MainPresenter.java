@@ -33,13 +33,8 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         String userToken = mUserModel.getUserToken();
-        if (userToken.length() != 0) {
-            mProductModel.loadProducts(userToken);
-        } else {
-            mView.navigateToLogin();
-        }
+        mProductModel.loadProducts(userToken);
     }
 
     @Subscribe

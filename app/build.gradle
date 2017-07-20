@@ -29,6 +29,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:cardview-v7:26.+'
     compile 'com.android.support:design:26.+'
+    // passcode
+    compile 'in.arjsna:passcodeview:1.2.1'
     // gson
     compile 'com.google.code.gson:gson:2.8.0'
     // retrofit
