@@ -12,9 +12,9 @@ import java.util.List;
 public class LoginResponse {
 
     @SerializedName("userdata")
-    private List<UserVO> mUser;
+    private UserVO mUser;
 
-    public List<UserVO> getUser() {
+    public UserVO getUser() {
         return mUser;
     }
 }

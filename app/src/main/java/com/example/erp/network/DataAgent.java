@@ -7,4 +7,6 @@ package com.example.erp.network;
 public interface DataAgent {
     void login(String email, String password);
     void loadProducts(String token);
+    void loadVendors(String token);
+    void loadLocations(String token);
 }

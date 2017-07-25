@@ -9,14 +9,13 @@ import com.google.gson.annotations.SerializedName;
 public class ProductResponse {
 
     @SerializedName("data")
-    private List<ProductVO> mData;
+    private List<ProductVO> mProducts;
 
-    public List<ProductVO> getData() {
-        return mData;
+    public List<ProductVO> getProductsList() {
+        return mProducts;
     }
 
-    public void setData(List<ProductVO> data) {
-        mData = data;
+    public void setProductList(List<ProductVO> mProducts) {
+        this.mProducts = mProducts;
     }
-
 }

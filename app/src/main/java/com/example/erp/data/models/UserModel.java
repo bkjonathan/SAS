@@ -55,7 +55,7 @@ public class UserModel extends BaseModel {
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onSuccesLoginEvent(UserEvent.SuccessLoginEvent event) {
-        String token = event.getLoginResponse().getUser().get(0).getToken();
+        String token = event.getUser().getToken();
         editor.putString(USER_TOKEN, token);
         Log.d(ERP.TAG, token);
         editor.commit();

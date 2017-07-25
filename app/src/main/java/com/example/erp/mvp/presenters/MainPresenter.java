@@ -39,7 +39,7 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     @Subscribe
     public void onProductLoadedEvent(DataEvent.ProductEvent event) {
-        List<ProductVO> productList = event.getProductResponse().getData();
+        List<ProductVO> productList = event.getProductResponse().getProductsList();
         mView.displayProductList(productList);
     }
 
