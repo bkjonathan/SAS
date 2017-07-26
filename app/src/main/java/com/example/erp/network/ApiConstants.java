@@ -8,7 +8,7 @@ public class ApiConstants {
 
     public static final String BASE_URL = "http://sinphyukyun.com/api/";
     public static final String API_LOGIN = "login";
-    public static final String API_PRODUCT = "products";
+    public static final String API_PRODUCT = "Products";
     public static final String API_VENDOR = "Vendors";
     public static final String API_LOCATION = "Locations";
 

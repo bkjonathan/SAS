@@ -1,6 +1,10 @@
 
 package com.example.erp.data.vos;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.example.erp.persistence.DataContract.ProductEntry;
 import com.google.gson.annotations.SerializedName;
 
 public class ProductVO {
@@ -126,4 +130,37 @@ public class ProductVO {
         mVpCode = vpCode;
     }
 
+    public ContentValues parseToContentValues() {
+        ContentValues cv = new ContentValues();
+        cv.put(ProductEntry.COLUMN_BRAND_NAME, mBrandName);
+        cv.put(ProductEntry.COLUMN_CAT_MYANMAR, mCatMyanmar);
+        cv.put(ProductEntry.COLUMN_DRC, mDrc);
+        cv.put(ProductEntry.COLUMN_DRC_EXPIRE_DATE, mDrcExpiryDate);
+        cv.put(ProductEntry.COLUMN_DRC_REG_NO, mDrcRegNo);
+        cv.put(ProductEntry.COLUMN_GENERIC_NAME, mGenericName);
+        cv.put(ProductEntry.COLUMN_ITEM_CODE, mItemCode);
+        cv.put(ProductEntry.COLUMN_HSCODE, mHscode);
+        cv.put(ProductEntry.COLUMN_ID, mId);
+        cv.put(ProductEntry.COLUMN_PACK_SIZE, mPackSize);
+        cv.put(ProductEntry.COLUMN_VENDOR_TEAM, mVendorTeam);
+        cv.put(ProductEntry. COLUMN_VP_CODE, mVpCode);
+        return cv;
+    }
+
+    public static ProductVO parseFromCursor(Cursor data) {
+        ProductVO product = new ProductVO();
+        product.mBrandName = data.getString(data.getColumnIndex(ProductEntry.COLUMN_BRAND_NAME));
+        product.mCatMyanmar = data.getString(data.getColumnIndex(ProductEntry.COLUMN_CAT_MYANMAR));
+        product.mDrc = data.getString(data.getColumnIndex(ProductEntry.COLUMN_DRC));
+        product.mDrcExpiryDate = data.getString(data.getColumnIndex(ProductEntry.COLUMN_DRC_EXPIRE_DATE));
+        product.mDrcRegNo = data.getString(data.getColumnIndex(ProductEntry.COLUMN_DRC_REG_NO));
+        product.mGenericName = data.getString(data.getColumnIndex(ProductEntry.COLUMN_GENERIC_NAME));
+        product.mItemCode = data.getString(data.getColumnIndex(ProductEntry.COLUMN_ITEM_CODE));
+        product.mHscode = data.getString(data.getColumnIndex(ProductEntry.COLUMN_HSCODE));
+        product.mId = Long.parseLong(data.getString(data.getColumnIndex(ProductEntry.COLUMN_ID)));
+        product.mPackSize = data.getString(data.getColumnIndex(ProductEntry.COLUMN_PACK_SIZE));
+        product.mVendorTeam = data.getString(data.getColumnIndex(ProductEntry.COLUMN_VENDOR_TEAM));
+        product.mVpCode = data.getString(data.getColumnIndex(ProductEntry.COLUMN_VP_CODE));
+        return product;
+    }
 }

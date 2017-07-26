@@ -1,7 +1,11 @@
 
 package com.example.erp.data.vos;
 
+import android.content.ContentValues;
+
 import javax.annotation.Generated;
+
+import com.example.erp.persistence.DataContract.VendorEntry;
 import com.google.gson.annotations.SerializedName;
 
 public class VendorVO {
@@ -41,5 +45,16 @@ public class VendorVO {
 
     public String getWebsite() {
         return mWebsite;
+    }
+
+    public ContentValues parseToContentValues() {
+        ContentValues cv = new ContentValues();
+        cv.put(VendorEntry.COLUMN_ADDRESS, mAddress);
+        cv.put(VendorEntry.COLUMN_EMAIL, mEmail);
+        cv.put(VendorEntry.COLUMN_FAX, mFax);
+        cv.put(VendorEntry.COLUMN_NAME, mName);
+        cv.put(VendorEntry.COLUMN_PHONE, mPhone);
+        cv.put(VendorEntry.COLUMN_WEBSITE, mWebsite);
+        return cv;
     }
 }

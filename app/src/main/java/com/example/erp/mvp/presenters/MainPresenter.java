@@ -3,8 +3,10 @@ package com.example.erp.mvp.presenters;
 import android.content.Context;
 
 import com.example.erp.ERP;
+import com.example.erp.data.models.LocationModel;
 import com.example.erp.data.models.ProductModel;
 import com.example.erp.data.models.UserModel;
+import com.example.erp.data.models.VendorModel;
 import com.example.erp.data.vos.ProductVO;
 import com.example.erp.events.DataEvent;
 import com.example.erp.events.LoadFailedEvent;
@@ -26,25 +28,25 @@ public class MainPresenter extends BasePresenter<MainView> {
     @Inject public ProductModel mProductModel;
     @Inject public UserModel mUserModel;
 
+    private Context mContext;
+
     public MainPresenter(Context context) {
 
+        mContext = context;
         ((ERP) context.getApplicationContext()).getAppComponent().inject(this);
     }
 
-    @Override
-    public void onCreate() {
+    public void onLoadProductFromNetwork() {
         String userToken = mUserModel.getUserToken();
-        mProductModel.loadProducts(userToken);
-    }
-
-    @Subscribe
-    public void onProductLoadedEvent(DataEvent.ProductEvent event) {
-        List<ProductVO> productList = event.getProductResponse().getProductsList();
-        mView.displayProductList(productList);
+        mProductModel.loadProducts(mContext, userToken);
     }
 
     @Subscribe
     public void onProductLoadFailed(LoadFailedEvent event) {
         mView.displayFailedToLoad(event.getErrorMsg());
+    }
+
+    public void onProductLoaded(List<ProductVO> productList) {
+        mView.displayProductList(productList);
     }
 }

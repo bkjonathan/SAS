@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.erp.mvp.presenters.LoginPresenter;
 import com.example.erp.mvp.presenters.MainPresenter;
 import com.example.erp.mvp.presenters.PasswordLoginPresenter;
+import com.example.erp.mvp.presenters.ProductDetailPresenter;
 
 import javax.inject.Singleton;
 
@@ -33,5 +34,11 @@ public class PresenterModule {
     @Singleton
     public PasswordLoginPresenter providePasswordLoginPresenter(Context context) {
         return new PasswordLoginPresenter(context);
+    }
+
+    @Provides
+    @Singleton
+    public ProductDetailPresenter provideProductDetailPresenter() {
+        return new ProductDetailPresenter();
     }
 }

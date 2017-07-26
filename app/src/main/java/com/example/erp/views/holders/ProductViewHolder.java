@@ -14,29 +14,31 @@ import butterknife.BindView;
 
 public class ProductViewHolder extends BaseViewHolder<ProductVO> {
 
-    @BindView(R.id.tv_product_id) TextView tvId;
-    @BindView(R.id.tv_item_code) TextView tvItemCode;
-    @BindView(R.id.tv_vp_code) TextView tvVpCode;
-    @BindView(R.id.tv_brand_name) TextView tvBrandName;
-    @BindView(R.id.tv_generic_name) TextView tvGenericName;
-    @BindView(R.id.tv_drc_reg_no) TextView tvDrcRegNo;
-    @BindView(R.id.tv_drc_expiry_date) TextView tvDrcExpiryDate;
-    @BindView(R.id.tv_drc) TextView tvDrc;
 
-    public ProductViewHolder(View itemView) {
+    @BindView(R.id.tv_item_code) TextView tvItemCode;
+
+   private ControllerProductItem mController;
+    private ProductVO mProduct;
+
+    public ProductViewHolder(View itemView, ControllerProductItem controller) {
         super(itemView);
+        mController = controller;
     }
 
     @Override
     public void bind(ProductVO data) {
-        tvId.setText(Long.toString(data.getId()));
+
+        mProduct = data;
+
         tvItemCode.setText(data.getItemCode());
-        tvVpCode.setText(data.getVpCode());
-        tvBrandName.setText(data.getBrandName());
-        tvGenericName.setText(data.getGenericName());
-        tvDrcRegNo.setText(data.getDrcRegNo());
-        tvDrcExpiryDate.setText(data.getDrcExpiryDate());
-        tvDrc.setText(data.getDrc());
     }
 
+    @Override
+    public void onClick(View view) {
+        mController.onProductClick(mProduct);
+    }
+
+    public interface ControllerProductItem {
+        void onProductClick(ProductVO productVO);
+    }
 }

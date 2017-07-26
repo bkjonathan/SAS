@@ -25,11 +25,6 @@ public abstract class BaseRecyclerAdapter<V extends BaseViewHolder, D>
         mData = new ArrayList<>();
     }
 
-    public void setData(List<D> newData) {
-        mData = newData;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getItemCount() {
         return mData.size();

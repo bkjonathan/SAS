@@ -15,14 +15,17 @@ import com.example.erp.views.holders.ProductViewHolder;
 
 public class ProductAdapter extends BaseRecyclerAdapter<ProductViewHolder, ProductVO> {
 
-    public ProductAdapter(Context context) {
+    private ProductViewHolder.ControllerProductItem mController;
+
+    public ProductAdapter(Context context, ProductViewHolder.ControllerProductItem controllerProductItem) {
         super(context);
+        mController = controllerProductItem;
     }
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.list_item_product, parent, false);
-        return new ProductViewHolder(view);
+        return new ProductViewHolder(view, mController);
     }
 
     @Override

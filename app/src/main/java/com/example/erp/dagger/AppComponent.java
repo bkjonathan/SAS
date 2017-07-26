@@ -3,6 +3,7 @@ package com.example.erp.dagger;
 import com.example.erp.activities.LoginActivity;
 import com.example.erp.activities.MainActivity;
 import com.example.erp.activities.PasswordLoginActivity;
+import com.example.erp.activities.ProductDetailActivity;
 import com.example.erp.data.models.BaseModel;
 import com.example.erp.mvp.presenters.LoginPresenter;
 import com.example.erp.mvp.presenters.MainPresenter;
@@ -23,6 +24,7 @@ public interface AppComponent {
     void inject(LoginActivity loginActivity);
     void inject(MainActivity mainActivity);
     void inject(PasswordLoginActivity passwordLoginActivity);
+    void inject(ProductDetailActivity productDetailActivity);
 
     // models
     void inject(BaseModel baseModel);

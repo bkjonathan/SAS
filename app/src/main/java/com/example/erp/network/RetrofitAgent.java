@@ -1,5 +1,6 @@
 package com.example.erp.network;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.erp.ERP;
@@ -67,7 +68,8 @@ public class RetrofitAgent implements DataAgent {
     }
 
     @Override
-    public void loadProducts(String token) {
+    public void loadProducts(final Context context, String token) {
+        Log.d(ERP.TAG, "loading products...");
         final Call<ProductResponse> productCall = apiCalls.loadProducts(token);
 
         productCall.enqueue(new Callback<ProductResponse>() {
@@ -75,8 +77,11 @@ public class RetrofitAgent implements DataAgent {
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 ProductResponse productResponse = response.body();
                 if (productResponse != null) {
-                    EventBus.getDefault().post(new DataEvent.ProductEvent(productResponse));
+                    EventBus.getDefault().post(
+                            new DataEvent.ProductEvent(context, productResponse.getProductsList())
+                    );
                 }
+                Log.d(ERP.TAG, "productsResponseCount: " + productResponse.getProductsList().size());
             }
 
             @Override
@@ -87,7 +92,8 @@ public class RetrofitAgent implements DataAgent {
     }
 
     @Override
-    public void loadVendors(String token) {
+    public void loadVendors(final Context context, String token) {
+        Log.d(ERP.TAG, "loading vendors...");
         Call<VendorResponse> vendorCall = apiCalls.loadVendors(token);
 
         vendorCall.enqueue(new Callback<VendorResponse>() {
@@ -95,8 +101,11 @@ public class RetrofitAgent implements DataAgent {
             public void onResponse(Call<VendorResponse> call, Response<VendorResponse> response) {
                 VendorResponse vendorResponse = response.body();
                 if (vendorResponse != null) {
-                    //TODO: post success event
+                    EventBus.getDefault().post(
+                            new DataEvent.VendorEvent(context, vendorResponse.getVendorList())
+                    );
                 }
+                Log.d(ERP.TAG, "vendorResponseCount: " + vendorResponse.getVendorList().size());
             }
 
             @Override
@@ -107,7 +116,8 @@ public class RetrofitAgent implements DataAgent {
     }
 
     @Override
-    public void loadLocations(String token) {
+    public void loadLocations(final Context context, String token) {
+        Log.d(ERP.TAG, "loading locations...");
         Call<LocationResponse> locationCall = apiCalls.loadLocations(token);
 
         locationCall.enqueue(new Callback<LocationResponse>() {
@@ -115,8 +125,11 @@ public class RetrofitAgent implements DataAgent {
             public void onResponse(Call<LocationResponse> call, Response<LocationResponse> response) {
                 LocationResponse locationResponse = response.body();
                 if (locationResponse != null) {
-                    //TODO: post success event
+                    EventBus.getDefault().post(
+                            new DataEvent.LocationEvent(context, locationResponse.getLocationList())
+                    );
                 }
+                Log.d(ERP.TAG, "locationResponseCount: " + locationResponse.getLocationList().size());
             }
 
             @Override

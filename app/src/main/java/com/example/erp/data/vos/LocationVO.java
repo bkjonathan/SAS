@@ -1,5 +1,8 @@
 package com.example.erp.data.vos;
 
+import android.content.ContentValues;
+
+import com.example.erp.persistence.DataContract.LocationEntry;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -17,5 +20,11 @@ public class LocationVO {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public ContentValues parseToContentValues() {
+        ContentValues cv = new ContentValues();
+        cv.put(LocationEntry.COLUMN_NAME, mName);
+        return cv;
     }
 }
