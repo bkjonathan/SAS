@@ -1,11 +1,11 @@
 package com.example.erp.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.erp.R;
+import com.example.erp.adapters.base.BaseRecyclerAdapter;
 import com.example.erp.data.vos.ProductVO;
 import com.example.erp.views.holders.ProductViewHolder;
 

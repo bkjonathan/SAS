@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.erp.ERP;
 import com.example.erp.R;
+import com.example.erp.activities.base.BaseActivity;
 import com.example.erp.mvp.presenters.LoginPresenter;
 import com.example.erp.mvp.views.LoginView;
 
@@ -20,14 +21,10 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity
     implements LoginView {
 
-    @BindView(R.id.login_email)
-    EditText edtEmail;
+    @BindView(R.id.login_email) EditText edtEmail;
+    @BindView(R.id.login_password) EditText edtPassword;
 
-    @BindView(R.id.login_password)
-    EditText edtPassword;
-
-    @Inject
-    public LoginPresenter mPresenter;
+    @Inject public LoginPresenter mPresenter;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -47,12 +44,14 @@ public class LoginActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
+        // register event bus
         mPresenter.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        // unregister event bus
         mPresenter.onStop();
     }
 

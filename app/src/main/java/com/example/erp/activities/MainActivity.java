@@ -2,145 +2,105 @@ package com.example.erp.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.erp.ERP;
 import com.example.erp.R;
-import com.example.erp.adapters.ProductAdapter;
-import com.example.erp.data.models.ProductModel;
-import com.example.erp.data.models.UserModel;
-import com.example.erp.data.vos.ProductVO;
-import com.example.erp.data.vos.UserVO;
-import com.example.erp.events.DataEvent;
-import com.example.erp.events.LoadFailedEvent;
-import com.example.erp.mvp.presenters.MainPresenter;
-import com.example.erp.mvp.views.MainView;
-import com.example.erp.persistence.DataContract;
-import com.example.erp.views.holders.ProductViewHolder;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.example.erp.activities.base.BaseActivity;
+import com.example.erp.adapters.MainAdapter;
+import com.example.erp.data.models.MainModel;
+import com.example.erp.views.holders.MainViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.erp.utils.Constants.ID_MAIN_LOADER;
+/**
+ * Created by zwe on 8/6/17.
+ */
 
-public class MainActivity extends BaseActivity
-        implements MainView,
-        LoaderManager.LoaderCallbacks<Cursor>,
-        ProductViewHolder.ControllerProductItem {
+public class MainActivity extends BaseActivity{
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.rv_main)
+    RecyclerView rvMainList;
 
-    @BindView(R.id.rv_product_list)
-    RecyclerView mProductList;
-
-    private ProductAdapter mProductAdapter;
-
-    @Inject
-    public MainPresenter mPresenter;
+    String[] title = {"Permission",
+            "Roles",
+            "UserRole",
+            "Category",
+            "Category Therapeutic",
+            "Carrier",
+            "Hscode",
+            "Pack",
+            "Location",
+            "Vendor",
+            "Vendor Team",
+            "Vendor Terms",
+            "Vendor Bank Detail",
+            "Company Profile",
+            "Product",
+            "Purchase Order",
+            "Inventory",
+            "Custom",
+            "Token",
+            "Exchange Amount"};
+    private MainAdapter mMainAdapter;
+    private List<MainModel> mainModelList;
+    private MainViewHolder.ControllerMainItem controllerMainItem;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
     }
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this, this);
-        setSupportActionBar(toolbar);
 
-        ((ERP) getApplicationContext()).getAppComponent().inject(this);
-        mPresenter.setView(this);
+        ButterKnife.bind(this,this);
 
-        mProductAdapter = new ProductAdapter(this, this);
-        mProductList.setLayoutManager(new GridLayoutManager(this, 2));
-        mProductList.setAdapter(mProductAdapter);
+        mMainAdapter = new MainAdapter(this, controllerMainItem);
+        mainModelList = new ArrayList<>();
+        rvMainList.setLayoutManager(new GridLayoutManager(this,3));
+        rvMainList.setAdapter(mMainAdapter);
+        setData();
 
-        getSupportLoaderManager().initLoader(ID_MAIN_LOADER, null, this);
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mPresenter.onStart();
-    }
+    private void setData() {
+        MainModel model;
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mPresenter.onStop();
-    }
-
-    @Override
-    public void displayProductList(List<ProductVO> productList) {
-        mProductAdapter.setNewData(productList);
-    }
-
-    @Override
-    public void displayFailedToLoad(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(
-                this,
-                DataContract.ProductEntry.CONTENT_URI,
-                null,
-                null,
-                null,
-                null
-        );
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data != null && data.moveToFirst()) {
-            List<ProductVO> productList = new ArrayList<>();
-            do {
-                ProductVO product =
-                        ProductVO.parseFromCursor(data);
-                productList.add(product);
-            } while (data.moveToNext());
-
-            mPresenter.onProductLoaded(productList);
-        } else {
-            mPresenter.onLoadProductFromNetwork();
+        for (int i=0;i<title.length;i++){
+            model = new MainModel(R.drawable.permission,title[i]);
+            mainModelList.add(model);
         }
+
+        //mainModelList.notifyAll();
+        mMainAdapter.setNewData(mainModelList);
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
     }
 
     @Override
-    public void onProductClick(ProductVO productVO) {
-        startActivity(ProductDetailActivity.newIntent(this, productVO.getItemCode()));
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_notification){
+            startActivity(new Intent(MainActivity.this,CompanyProfile.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -3,7 +3,7 @@ package com.example.erp.dagger;
 import android.content.Context;
 
 import com.example.erp.mvp.presenters.LoginPresenter;
-import com.example.erp.mvp.presenters.MainPresenter;
+import com.example.erp.mvp.presenters.ProductPresenter;
 import com.example.erp.mvp.presenters.PasswordLoginPresenter;
 import com.example.erp.mvp.presenters.ProductDetailPresenter;
 
@@ -20,8 +20,8 @@ public class PresenterModule {
 
     @Provides
     @Singleton
-    public MainPresenter provideMainPresenter(Context context) {
-        return new MainPresenter(context);
+    public ProductPresenter provideMainPresenter(Context context) {
+        return new ProductPresenter(context);
     }
 
     @Provides

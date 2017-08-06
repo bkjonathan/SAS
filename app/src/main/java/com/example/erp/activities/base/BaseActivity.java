@@ -1,9 +1,6 @@
-package com.example.erp.activities;
+package com.example.erp.activities.base;
 
 import android.support.v7.app.AppCompatActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 /**
  * Created by myolwin00 on 7/11/17.

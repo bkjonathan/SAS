@@ -2,8 +2,7 @@
 package com.example.erp.data.vos;
 
 import android.content.ContentValues;
-
-import javax.annotation.Generated;
+import android.database.Cursor;
 
 import com.example.erp.persistence.DataContract.VendorEntry;
 import com.google.gson.annotations.SerializedName;
@@ -56,5 +55,16 @@ public class VendorVO {
         cv.put(VendorEntry.COLUMN_PHONE, mPhone);
         cv.put(VendorEntry.COLUMN_WEBSITE, mWebsite);
         return cv;
+    }
+
+    public static VendorVO parseFromCursor(Cursor data) {
+        VendorVO vendor = new VendorVO();
+        vendor.mAddress = data.getString(data.getColumnIndex(VendorEntry.COLUMN_ADDRESS));
+        vendor.mEmail = data.getString(data.getColumnIndex(VendorEntry.COLUMN_EMAIL));
+        vendor.mFax = data.getString(data.getColumnIndex(VendorEntry.COLUMN_FAX));
+        vendor.mName = data.getString(data.getColumnIndex(VendorEntry.COLUMN_NAME));
+        vendor.mPhone = data.getString(data.getColumnIndex(VendorEntry.COLUMN_PHONE));
+        vendor.mWebsite = data.getString(data.getColumnIndex(VendorEntry.COLUMN_WEBSITE));
+        return vendor;
     }
 }

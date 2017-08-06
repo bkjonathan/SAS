@@ -3,11 +3,11 @@ package com.example.erp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.example.erp.ERP;
 import com.example.erp.R;
+import com.example.erp.activities.base.BaseActivity;
 import com.example.erp.mvp.presenters.PasswordLoginPresenter;
 import com.example.erp.mvp.views.PasswordLoginView;
 
@@ -21,14 +21,9 @@ public class PasswordLoginActivity extends BaseActivity
         implements PassCodeView.TextChangeListener,
         PasswordLoginView {
 
-    @BindView(R.id.pcv_password)
-    PassCodeView passCodeView;
-
-    @BindView(R.id.tv_password_title)
-    TextView tvPasswordTitle;
-
-    @Inject
-    PasswordLoginPresenter mPresenter;
+    @BindView(R.id.pcv_password) PassCodeView passCodeView;
+    @BindView(R.id.tv_password_title) TextView tvPasswordTitle;
+    @Inject PasswordLoginPresenter mPresenter;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, PasswordLoginActivity.class);
@@ -43,6 +38,7 @@ public class PasswordLoginActivity extends BaseActivity
 
         ((ERP) getApplicationContext()).getAppComponent().inject(this);
         mPresenter.setView(this);
+        // consider login or register
         mPresenter.onCreate();
 
         passCodeView.setOnTextChangeListener(this);

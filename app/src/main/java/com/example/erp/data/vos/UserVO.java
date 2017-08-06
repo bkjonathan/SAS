@@ -17,6 +17,9 @@ public class UserVO {
     @SerializedName("_token")
     private String token;
 
+    /*@SerializedName("roles")
+    private List<String> mRoles;*/
+
     public UserVO() {
     }
 
@@ -44,4 +47,8 @@ public class UserVO {
     public String getToken() {
         return token;
     }
+
+    /*public List<String> getRoles() {
+        return mRoles;
+    }*/
 }

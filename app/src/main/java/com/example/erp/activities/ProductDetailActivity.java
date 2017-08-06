@@ -6,18 +6,16 @@ import android.database.Cursor;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.erp.ERP;
 import com.example.erp.R;
+import com.example.erp.activities.base.BaseActivity;
 import com.example.erp.data.vos.ProductVO;
 import com.example.erp.mvp.presenters.ProductDetailPresenter;
 import com.example.erp.mvp.views.ProductDetailView;
 import com.example.erp.persistence.DataContract;
-import com.example.erp.utils.Constants;
 
 import javax.inject.Inject;
 

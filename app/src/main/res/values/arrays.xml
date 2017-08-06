@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_roles">
+        <item>Accounting</item>
+        <item>Finance</item>
+        <item>Payroll</item>
+        <item>Import</item>
+        <item>Import(IL/LC)</item>
+        <item>Inventory</item>
+        <item>Tender</item>
+        <item>Branch Sales</item>
+        <item>Logistics</item>
+        <item>Area Sales Manager</item>
+        <item>Clerk/Account</item>
+        <item>Invoicing Clerk</item>
+        <item>Sales Order Collection</item>
+        <item>Sales Representatives</item>
+        <item>Full Access/Admin</item>
+    </string-array>
+</resources>

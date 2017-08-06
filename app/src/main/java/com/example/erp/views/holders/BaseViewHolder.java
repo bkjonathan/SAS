@@ -9,7 +9,9 @@ import butterknife.ButterKnife;
  * Created by myolwin00 on 7/11/17.
  */
 
-public abstract class BaseViewHolder<D> extends RecyclerView.ViewHolder implements View.OnClickListener {
+public abstract class BaseViewHolder<D> extends RecyclerView.ViewHolder
+        implements View.OnClickListener {
+
     public BaseViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -17,7 +19,6 @@ public abstract class BaseViewHolder<D> extends RecyclerView.ViewHolder implemen
     }
 
     public abstract void bind(D data);
-
 
     @Override
     public void onClick(View view) {

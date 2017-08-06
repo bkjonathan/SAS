@@ -1,7 +1,6 @@
 package com.example.erp.mvp.presenters;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.erp.ERP;
 import com.example.erp.data.models.UserModel;
@@ -28,7 +27,6 @@ public class PasswordLoginPresenter extends BasePresenter<PasswordLoginView> {
 
     @Override
     public void onCreate() {
-
         String userToken = mUserModel.getUserToken();
         if (userToken.length() == 0) {
             mView.onNavigateToUserLogin();

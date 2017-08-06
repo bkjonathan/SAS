@@ -14,10 +14,9 @@ import butterknife.BindView;
 
 public class ProductViewHolder extends BaseViewHolder<ProductVO> {
 
-
     @BindView(R.id.tv_item_code) TextView tvItemCode;
 
-   private ControllerProductItem mController;
+    private ControllerProductItem mController;
     private ProductVO mProduct;
 
     public ProductViewHolder(View itemView, ControllerProductItem controller) {
@@ -27,18 +26,16 @@ public class ProductViewHolder extends BaseViewHolder<ProductVO> {
 
     @Override
     public void bind(ProductVO data) {
-
         mProduct = data;
-
         tvItemCode.setText(data.getItemCode());
     }
 
     @Override
     public void onClick(View view) {
-        mController.onProductClick(mProduct);
+        mController.onProductClicked(mProduct);
     }
 
     public interface ControllerProductItem {
-        void onProductClick(ProductVO productVO);
+        void onProductClicked(ProductVO productVO);
     }
 }
