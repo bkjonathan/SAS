@@ -1,8 +1,13 @@
 package com.example.erp.activities;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,10 +26,17 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity
     implements LoginView {
 
-    @BindView(R.id.login_email) EditText edtEmail;
-    @BindView(R.id.login_password) EditText edtPassword;
+    @BindView(R.id.login_email)
+    EditText edtEmail;
 
-    @Inject public LoginPresenter mPresenter;
+    @BindView(R.id.login_password)
+    EditText edtPassword;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @Inject
+    public LoginPresenter mPresenter;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
@@ -44,21 +56,41 @@ public class LoginActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
-        // register event bus
         mPresenter.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // unregister event bus
         mPresenter.onStop();
     }
 
-    @OnClick(R.id.bt_login) void onClick() {
-        String emailString = edtEmail.getText().toString();
-        String passwordString = edtPassword.getText().toString();
-        mPresenter.onLogin(emailString, passwordString);
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @OnClick({R.id.bt_login, R.id.fab}) void onClick(View view) {
+
+        switch (view.getId()){
+
+            case R.id.bt_login :
+                String emailString = edtEmail.getText().toString();
+                String passwordString = edtPassword.getText().toString();
+                mPresenter.onLogin(emailString, passwordString);
+                break;
+
+            case R.id.fab:
+                getWindow().setExitTransition(null);
+                getWindow().setEnterTransition(null);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class), options.toBundle());
+                } else {
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                }
+                break;
+
+        }
+
     }
 
     @Override

@@ -42,6 +42,7 @@
         </activity>
 
         <activity android:name=".activities.CompanyProfile"/>
+        <activity android:name=".activities.RegisterActivity" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
